@@ -20,20 +20,20 @@ def main(book: Book, commands: list[tuple[str, str]]) -> None | str:
 
     for cmd, method_type in commands:
         if cmd == "display":
-            display_strategies = display_strategies.get(method_type)
-            if not display_strategies:
+            display = display_strategies.get(method_type)
+            if not display:
                 raise ValueError(f"Unknown display type: {method_type}")
-            display_strategies.display(book.content)
+            display.display(book.content)
         elif cmd == "print":
-            print_strategies = print_strategies.get(method_type)
-            if not print_strategies:
+            printer = print_strategies.get(method_type)
+            if not printer:
                 raise ValueError(f"Unknown print type: {method_type}")
-            print_strategies.print_book(book)
+            printer.print_book(book)
         elif cmd == "serialize":
-            serialize_strategies = serialize_strategies.get(method_type)
-            if not serialize_strategies:
+            serializer = serialize_strategies.get(method_type)
+            if not serializer:
                 raise ValueError(f"Unknown serialize type: {method_type}")
-            return serialize_strategies.serialize(book)
+            return serializer.serialize(book)
 
 
 if __name__ == "__main__":
